@@ -1,0 +1,12 @@
+segment,value,rows,failure_rate,false_negative_rate,false_positive_rate
+inspection_group,Canvass,3547,0.26896,0.30922,0.54030
+inspection_group,Complaint,1177,0.39592,0.11373,0.70605
+inspection_group,License,1277,0.24354,0.22508,0.73602
+inspection_group,Other,10,0.00000,0.00000,0.30000
+inspection_group,Re-inspection,1984,0.10887,0.90278,0.05600
+risk_group,Risk 1,6601,0.24330,0.32628,0.42743
+risk_group,Risk 2,907,0.25910,0.25957,0.48810
+risk_group,Risk 3,485,0.21649,0.26667,0.66316
+risk_group,Unknown,2,0.50000,0.00000,1.00000
+has_history,False,1127,0.27862,0.12102,0.85363
+has_history,True,6868,0.23777,0.35211,0.38625

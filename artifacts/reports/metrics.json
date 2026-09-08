@@ -1,0 +1,87 @@
+{
+  "dataset": {
+    "rows": 59834,
+    "date_min": "2022-01-04",
+    "date_max": "2026-09-04",
+    "failure_rate": 0.2705,
+    "licenses": 17086,
+    "rows_with_prior_history": 42726,
+    "failure_rate_by_inspection_group": {
+      "Re-inspection": 0.1264,
+      "Other": 0.2523,
+      "License": 0.2899,
+      "Canvass": 0.3026,
+      "Complaint": 0.4202
+    }
+  },
+  "split": {
+    "train_rows": 42576,
+    "validation_rows": 9263,
+    "test_rows": 7995,
+    "train_end": "2025-04-11",
+    "validation_end": "2025-12-22",
+    "test_end": "2026-09-04",
+    "train_failure_rate": 0.28,
+    "validation_failure_rate": 0.2502,
+    "test_failure_rate": 0.2435
+  },
+  "validation": {
+    "prevalence_baseline": {
+      "average_precision": 0.2502,
+      "roc_auc": 0.5,
+      "brier_score": 0.1885,
+      "precision_at_top_10_percent": 0.2168,
+      "recall_at_top_10_percent": 0.0867
+    },
+    "logistic_regression": {
+      "average_precision": 0.3592,
+      "roc_auc": 0.65,
+      "brier_score": 0.1821,
+      "precision_at_top_10_percent": 0.4078,
+      "recall_at_top_10_percent": 0.1631
+    },
+    "hist_gradient_boosting": {
+      "average_precision": 0.3915,
+      "roc_auc": 0.6666,
+      "brier_score": 0.1773,
+      "precision_at_top_10_percent": 0.4671,
+      "recall_at_top_10_percent": 0.1868
+    }
+  },
+  "expanding_window_cv_average_precision": {
+    "logistic_regression": {
+      "folds": [
+        0.4097,
+        0.4018,
+        0.386
+      ],
+      "mean": 0.3992,
+      "std": 0.0098
+    },
+    "hist_gradient_boosting": {
+      "folds": [
+        0.4343,
+        0.4148,
+        0.399
+      ],
+      "mean": 0.416,
+      "std": 0.0144
+    }
+  },
+  "selected_model": "hist_gradient_boosting",
+  "test": {
+    "average_precision": 0.3952,
+    "roc_auc": 0.6705,
+    "brier_score": 0.1728,
+    "precision_at_top_10_percent": 0.4775,
+    "recall_at_top_10_percent": 0.1962
+  },
+  "test_at_validation_selected_threshold": {
+    "threshold": 0.2291,
+    "precision": 0.3294,
+    "recall": 0.6852,
+    "f1": 0.4449,
+    "flagged_share": 0.5066
+  },
+  "interpretation_method": "test-set permutation importance scored by average precision"
+}
