@@ -4,7 +4,7 @@ __pycache__/
 .pytest_cache/
 .coverage
 .env
+.matplotlib-cache/
 data/raw/
 artifacts/models/
 !artifacts/models/.gitkeep
-

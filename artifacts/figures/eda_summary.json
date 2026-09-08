@@ -1,0 +1,15 @@
+{
+  "rows": 59834,
+  "date_min": "2022-01-04",
+  "date_max": "2026-09-04",
+  "failure_rate": 0.2705,
+  "licenses": 17086,
+  "rows_with_prior_history": 42726,
+  "failure_rate_by_inspection_group": {
+    "Re-inspection": 0.1264,
+    "Other": 0.2523,
+    "License": 0.2899,
+    "Canvass": 0.3026,
+    "Complaint": 0.4202
+  }
+}
