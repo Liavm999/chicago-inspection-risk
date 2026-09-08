@@ -16,4 +16,7 @@ jobs:
       - run: pip install -e ".[dev]"
       - run: ruff check src tests
       - run: pytest
-
+      - run: python -m inspection_risk train
+        env:
+          MPLCONFIGDIR: .matplotlib-cache
+          LOKY_MAX_CPU_COUNT: "4"
