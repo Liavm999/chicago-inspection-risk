@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "inspection-risk"
+version = "0.1.0"
+description = "Leakage-safe Chicago food inspection risk modeling"
+requires-python = ">=3.11"
+dependencies = [
+  "joblib==1.5.1",
+  "matplotlib==3.10.5",
+  "numpy==2.3.2",
+  "pandas==2.3.1",
+  "scikit-learn==1.7.1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest==8.4.1", "ruff==0.12.7"]
+
+[project.scripts]
+inspection-risk = "inspection_risk.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
