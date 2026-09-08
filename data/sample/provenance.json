@@ -1,0 +1,12 @@
+{
+  "source": "City of Chicago Food Inspections",
+  "dataset_id": "4ijn-s7e5",
+  "source_url": "https://data.cityofchicago.org/Health-Human-Services/Food-Inspections/4ijn-s7e5",
+  "api_url": "https://data.cityofchicago.org/resource/4ijn-s7e5.csv",
+  "captured_at": "2026-09-08",
+  "filters": "inspection_date >= 2022-01-01; result in Pass or Fail; license present",
+  "ordering": "inspection_date ASC, inspection_id ASC",
+  "rows": 59834,
+  "sha256": "a84f7eeaf2f9542688857477db56a294f5d3b0cfd965c3539d4aa0581caf3305",
+  "note": "The extract contains only the ten source fields used before feature engineering; violation text, current result leakage fields beyond the target, and business names are not retained."
+}
