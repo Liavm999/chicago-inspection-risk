@@ -31,12 +31,6 @@ class TemporalSplit:
     validation_end: pd.Timestamp
 
 
-def _collapse_rare(series: pd.Series, *, minimum_count: int) -> pd.Series:
-    cleaned = series.fillna("Unknown").astype(str).str.strip()
-    common = cleaned.value_counts()[lambda counts: counts >= minimum_count].index
-    return cleaned.where(cleaned.isin(common), "Other")
-
-
 def _inspection_group(series: pd.Series) -> pd.Series:
     normalized = series.fillna("Unknown").astype(str).str.lower()
     output = pd.Series("Other", index=series.index, dtype="string")
@@ -92,7 +86,11 @@ def prepare_model_frame(raw: pd.DataFrame) -> pd.DataFrame:
     frame["smoothed_prior_fail_rate"] = (
         frame["prior_failures"] + 1.0
     ) / (frame["prior_inspections"] + 4.0)
-    frame["facility_group"] = _collapse_rare(frame["facility_type"], minimum_count=100)
+    # Frequency-based grouping belongs inside fitted model preprocessing, not here;
+    # looking at full-dataset category counts would reveal the future test period.
+    frame["facility_group"] = (
+        frame["facility_type"].fillna("Unknown").astype(str).str.strip().str.lower()
+    )
     frame["risk_group"] = (
         frame["risk"].fillna("Unknown").str.extract(r"(Risk \d)", expand=False).fillna("Unknown")
     )
@@ -137,4 +135,3 @@ def chronological_split(
     if min(len(train), len(validation), len(test)) == 0:
         raise ValueError("temporal split produced an empty partition")
     return TemporalSplit(train, validation, test, train_end, validation_end)
-

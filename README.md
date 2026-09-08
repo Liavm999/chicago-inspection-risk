@@ -17,11 +17,11 @@ Gradient boosting was selected on the validation period and then refit on train 
 
 | Metric | Result | Interpretation |
 |---|---:|---|
-| Average precision | **0.395** | Prevalence-only reference is the 0.244 test failure rate |
-| ROC AUC | **0.671** | Moderate ranking signal, not a deterministic forecast |
-| Brier score | **0.173** | Lower is better; probability accuracy is useful but imperfect |
-| Precision in top-risk 10% | **47.8%** | About 2× the overall test failure rate |
-| Recall in top-risk 10% | **19.6%** | A narrow queue cannot capture most failures |
+| Average precision | **0.370** | Prevalence-only reference is the 0.244 test failure rate |
+| ROC AUC | **0.648** | Moderate ranking signal, not a deterministic forecast |
+| Brier score | **0.179** | Lower is better; probability accuracy is useful but imperfect |
+| Precision in top-risk 10% | **45.9%** | About 1.9× the overall test failure rate |
+| Recall in top-risk 10% | **18.9%** | A narrow queue cannot capture most failures |
 
 The model is useful for prioritization, not for replacing inspections or penalizing businesses. The highest predicted-risk bin is somewhat overconfident, and geographic/facility variables require governance review before any operational use.
 
@@ -64,7 +64,7 @@ Rare facility categories are grouped to control cardinality. A fixed Beta-style 
 
 ### Model selection
 
-Validation average precision was 0.250 for the prevalence baseline, 0.359 for logistic regression, and 0.392 for histogram gradient boosting. Three expanding-window folds also favored boosting (mean AP 0.416 vs 0.399), though both declined on later folds—a sign of temporal drift rather than a result to hide.
+Validation average precision was 0.250 for the prevalence baseline, 0.359 for logistic regression, and 0.381 for histogram gradient boosting. Three expanding-window folds also favored boosting (mean AP 0.414 vs 0.399). The final test score was lower than cross-validation, a sign of temporal drift rather than a result to hide.
 
 ![Permutation importance](artifacts/figures/feature_importance.png)
 
@@ -120,4 +120,3 @@ Administrative data reflects inspection policy, scheduling, and recording practi
 Full metrics are in [`artifacts/reports/metrics.json`](artifacts/reports/metrics.json); segmented false-negative/false-positive rates are in [`artifacts/reports/segment_error_analysis.csv`](artifacts/reports/segment_error_analysis.csv).
 
 Data source: [City of Chicago Food Inspections](https://data.cityofchicago.org/Health-Human-Services/Food-Inspections/4ijn-s7e5). The source is updated over time, so a fresh download will not reproduce the committed snapshot byte-for-byte.
-

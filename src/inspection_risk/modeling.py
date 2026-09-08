@@ -69,7 +69,12 @@ def _boosted_pipeline() -> Pipeline:
             ("imputer", SimpleImputer(strategy="most_frequent")),
             (
                 "ordinal",
-                OrdinalEncoder(handle_unknown="use_encoded_value", unknown_value=-1),
+                OrdinalEncoder(
+                    handle_unknown="use_encoded_value",
+                    unknown_value=-1,
+                    min_frequency=100,
+                    max_categories=200,
+                ),
             ),
         ]
     )
@@ -89,6 +94,7 @@ def _boosted_pipeline() -> Pipeline:
                     max_leaf_nodes=24,
                     min_samples_leaf=45,
                     l2_regularization=1.0,
+                    categorical_features=[8, 9, 10, 11],
                     random_state=42,
                 ),
             ),

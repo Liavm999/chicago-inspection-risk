@@ -2,7 +2,7 @@
 
 ## The 30-second explanation
 
-I used nearly 60,000 Chicago food inspections to ask whether upcoming failures can be prioritized from pre-inspection information. The hard part was not the classifier; it was creating establishment history without leaking current or same-day outcomes and evaluating on future time periods. I compared a prevalence baseline, logistic regression, and gradient boosting. Boosting reached 0.395 average precision on an untouched 2026 test set versus a 0.244 failure-rate reference, but the calibration and error analysis show it is only a prioritization aid.
+I used nearly 60,000 Chicago food inspections to ask whether upcoming failures can be prioritized from pre-inspection information. The hard part was not the classifier; it was creating establishment history without leaking current or same-day outcomes and evaluating on future time periods. I compared a prevalence baseline, logistic regression, and gradient boosting. Boosting reached 0.370 average precision on an untouched 2026 test set versus a 0.244 failure-rate reference, but the calibration and error analysis show it is only a prioritization aid.
 
 ## Methodology in plain language
 
@@ -20,10 +20,10 @@ I sorted records by date, calculated each license's history from prior calendar 
 
 ## Results without exaggeration
 
-- Test AP: 0.395; test failure prevalence: 0.244.
-- Test ROC AUC: 0.671; useful but far from deterministic.
-- Top-risk 10% precision: 47.8%; recall: 19.6%.
-- The validation-selected F1 threshold flags 50.7% of test rows, so it is not a sensible scarce-capacity policy by itself.
+- Test AP: 0.370; test failure prevalence: 0.244.
+- Test ROC AUC: 0.648; useful but far from deterministic.
+- Top-risk 10% precision: 45.9%; recall: 18.9%.
+- The validation-selected F1 threshold flags 49.3% of test rows, so it is not a sensible scarce-capacity policy by itself.
 - High predicted probabilities are somewhat overconfident. Recalibration and monitoring would be required.
 
 ## Important tradeoffs and mistakes to avoid
@@ -51,11 +51,10 @@ I selected by validation AP, supported by three date-grouped expanding-window fo
 Complaint, canvass, license, and re-inspection visits are scheduled under different conditions and have different base rates. The field is known beforehand and predictive, but it partly reflects policy, so I would monitor it rather than give it a causal interpretation.
 
 **What does top-decile precision mean?**  
-If capacity covers 10% of upcoming inspections, about 47.8% of that ranked test queue failed. It captures only 19.6% of all failures, so widening the queue trades precision for recall.
+If capacity covers 10% of upcoming inspections, about 45.9% of that ranked test queue failed. It captures only 18.9% of all failures, so widening the queue trades precision for recall.
 
 **Is the model calibrated?**  
-Only moderately. The Brier score is 0.173, and the reliability plot shows overprediction in the highest bin. I would recalibrate on a recent held-out window and monitor calibration drift before using probabilities as absolute risk.
+Only moderately. The Brier score is 0.179, and the reliability plot shows overprediction in the highest bin. I would recalibrate on a recent held-out window and monitor calibration drift before using probabilities as absolute risk.
 
 **What is the biggest validity threat?**  
 The label and inspection schedule are administrative processes. The model predicts recorded outcomes under that process, not latent food safety. Policy changes or selective inspection can shift both features and targets.
-
